@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="public/style.css.css">
+    <link rel="stylesheet" href="assets/portfolio3.css">
 </head>
 
 <body>
@@ -32,84 +35,81 @@
         <ul>
             <li class="icone">
                 <i class="fa-solid fa-house"></i>
-                <p class="link-name">home</p>
             </li>
             <li class="icone">
                 <i class="fa-sharp fa-solid fa-book-open"></i>
-                <p class="link-name">book</p>
             </li>
             <li class="icone">
                 <i class="fa-sharp fa-solid fa-envelope"></i>
-                <p class="link-name">contact</p>
             </li>
         </ul>
     </nav>
 
     <section>
+        <!--tab titre-->
         <div class="tableau tab-titre trans-tableau-hide">
-            <h1>valery longchamps</h1>
-            <h2>web developper</h2>
+            <div class="cube">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face left"></div>
+                <div class="face right"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+
+                <div class="cube2">
+                    <div class="face2 front2"></div>
+                    <div class="face2 back2"></div>
+                    <div class="face2 left2"></div>
+                    <div class="face2 right2"></div>
+                    <div class="face2 top2"></div>
+                    <div class="face2 bottom2"></div>
+                </div>
+            </div>
+
+            <div class="titre">
+                <h1>HiroYuhi</h1>
+                <h2>
+                    <div>Web</div>
+                    <div>Developer</div>
+                </h2>
+            </div>
         </div>
 
+        <!--tab projet-->
         <div class="tableau  tab-projet trans-tableau-hide">
-            <div class="element-slideshow">
+            <h3>Réalisation</h3>
+            <div class="carte-conteneur">
                 <div class="carte">
-                    <img src="assets/images/site photo.png" alt="" class="carte-img">
-                    <div class="carte-txt">
-                        <h3>Photographe</h3>
-                        <p>Site réalisé pour répondre aux besoin d'un photographe désirant
-                            présenter son travail sur le net.
-                            Largement inspiré de celui du studio "Huibvintges Photography".
-                        </p>
-                        <a href="http://wwbrdma.cluster030.hosting.ovh.net/?op=home">visiter</a>
+                    <img class="img" src="assets/images/home_mariage.png" alt="">
+                    <h4>Photographie</h4>
+                    <div class="langage">
+                        <img src="assets/images/css.png" alt="">
+                        <img src="assets/images/js.png" alt="">
+                        <img src="assets/images/php.png" alt="">
+                        <img src="assets/images/mysql.png" alt="">
                     </div>
+                    <a href="http://wwbrdma.cluster030.hosting.ovh.net/?op=home">Visiter</a>
                 </div>
-                <div class="carte">
-                    <img src="assets/images/Love, Death + Robots - Saison 3.jpg" alt="" class="carte-img">
-                    <div class="carte-txt">
-                        <h3>Bibliothèque Video</h3>
-                        <p>Application web permettant d'archiver les séries vivionnées.
-                            Source rapide et pratique d'informations.
-                        </p>
-                        <a href="#">à venir</a>
-                    </div>
-                </div>
-                <div class="carte">
-                    <img src="assets/images/lecteur audio.jpg" alt="" class="carte-img">
-                    <div class="carte-txt">
-                        <h3>Lecteur Audio</h3>
-                        <p>Application web permettant de diffuser du contenu audio.
-                            A l'image d'une application audio telle que Deezer.
-                        </p>
-                        <a href="#">à venir</a>
-                    </div>
-                </div>
-
-                <a class="bouton-slideshow suivant" id="suivant"><i class="fa-solid fa-angle-right"></i></a>
-                <a class="bouton-slideshow precedent" id="precedent"><i class="fa-solid fa-angle-left"></i></a>
-            </div>
-
-
-            <div class="dot-slideshow">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
             </div>
         </div>
 
+        <!--tab contact-->
         <div class="tableau tab-contact trans-tableau-hide">
+            <h3>Contact</h3>
             <form method="post">
-                <input type="text" name="nom" placeholder="Nom">
-                <input type="text" name="prenom" placeholder="Prenom">
+                <div class="nom-prenom">
+                    <input type="text" name="nom" placeholder="Nom">
+                    <input type="text" name="prenom" placeholder="Prenom">
+                </div>
+
                 <input type="email" name="email" placeholder="Email">
                 <input type="text" name="sujet" placeholder="Sujet">
-                <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
-                <input type="submit" value="Envoyer le message">
+                <textarea id="textarea" name="message" placeholder="Message"></textarea>
+                <input type="submit" value="Envoyer">
             </form>
-            <a href="mailto:hiroyuhi@laposte.net">hiroyuhi@laposte.net</a>
 
+            <!--traitement du formulaire de contact-->
             <?php
-
             if (!empty($_POST)) {
                 $msgError = 0;
                 $champs_vides = 0;
@@ -130,9 +130,13 @@
                     $email = $_POST['email'];
                     $sujet = $_POST['sujet'];
                     $message =
-                        'Depuis le portfolio, De : ' . $prenom . ' ' . $nom . 'Message : ' . wordwrap($_POST['message'], 70, "\r\n");
+                        'Depuis le site PORTFOLIO
+                        De : ' . $prenom . ' ' . $nom . ' 
+                        Email : ' . $email . '
+                        Message : '
+                        . wordwrap($_POST['message'], 70, "\r\n");
                 }
-                $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net' . '\r\n' . 'reply-to:' . $email);
+                $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net,' . "\r\n" . 'Reply-to:' . $email);
                 if ($mail) {
                     $msgSucces = 'l\'email a ete envoyé';
                 } else {
@@ -142,14 +146,15 @@
                 $msgError = 'veuillez remplir le formulaire avant envoie';
             }
 
-            function debug($variable)
-            {
-                echo '<pre>';
-                var_dump($variable);
-                echo '</pre>';
-            }
+            // function debug($variable)
+            // {
+            //     echo '<pre>';
+            //     var_dump($variable);
+            //     echo '</pre>';
+            // }
             ?>
         </div>
+
     </section>
 
     <footer></footer>
