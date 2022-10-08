@@ -1,3 +1,91 @@
+<!--traitement du formulaire de contact-->
+<?php
+session_start();
+error_reporting(0);
+
+if (isset($_POST['submit'])) {
+    if (
+        isset($_POST['nom']) &&
+        isset($_POST['prenom']) &&
+        isset($_POST['email']) &&
+        isset($_POST['sujet']) &&
+        isset($_POST['message'])
+    ) {
+
+        $champs_vides = 0;
+
+        foreach ($_POST as $indice => $valeur) {
+            $_POST[$indice] = htmlspecialchars($valeur);
+            $_POST[$indice] = trim($valeur);
+            if (trim($_POST[$indice] == '')) {
+                $champs_vides++;
+            }
+        }
+
+        if ($champs_vides > 0) {
+            $_SESSION['error'] = 'veuillez remplir tout les champs';
+        } else {
+
+            //pour l'envoi en local
+
+            // $nom = $_POST['nom'];
+            // $prenom = $_POST['prenom'];
+            // $email = $_POST['email'];
+            // $sujet = $_POST['sujet'];
+            // $message =
+            //     'Depuis le site PORTFOLIO :
+            //         De : ' . $prenom . ' ' . $nom . ' 
+            //         Email : ' . $email . '
+            //         Message : '
+            //         . wordwrap($_POST['message'], 70, "\r\n");
+            // $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net,' . "\r\n" . 'Reply-to:' . $email);
+
+            
+            //pour l'envoi en html
+
+            $to ='hiroyuhi@laposte.net';
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $email = $_POST['email'];
+            $sujet = $_POST['sujet'];
+            $message = 
+            "<p>Depuis le <strong>Portfolio</strong></p>
+            <p>De : <strong>".$prenom."</strong> <strong>".$nom."</strong> </p>
+            <p>Email : <strong>".$email."</strong></p>
+            <p>Sujet <strong>".$sujet."</strong></p>
+            <p>Depuis le <strong>".$message."</strong></p>";
+
+            $headers = 'MIME-Version: 1.0'.'\r\n';
+            $headers = 'Content-type:text/html;charset=UTF-8'.'\r\n';
+            $headers .= 'From : <'.$email.'>'.'\r\n';
+            $headers .= 'Reply-to:' . $email;
+
+            $mail = mail($to, $sujet, $message, $headers);
+        }
+
+        if ($mail) {
+            $_SESSION['success'] = 'l\'email a été envoyé.';
+        } else {
+            $_SESSION['error_envoi'] = 'L\'email n\'a pas pu être envoyé.';
+        }
+    } else {
+        $_SESSION['error'] = 'Veuillez remplir tout les champs.';
+    }
+}
+
+function debug($variable)
+{
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+}
+
+// debug($_POST);
+// debug($_SESSION);
+// debug($champs_vides);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -45,6 +133,34 @@
         </ul>
     </nav>
 
+    <div class="message">
+        <?php
+        if (!empty($_SESSION['error'])) {
+        ?> <p class="error"><?= $_SESSION['error'] ?></p> <?php
+                                                        unset($_SESSION['error']);
+                                                    }
+                                                        ?>
+        <?php
+        if (!empty($_SESSION['error_email'])) {
+        ?> <p class="error"><?= $_SESSION['error_email'] ?></p> <?php
+                                                            unset($_SESSION['error_email']);
+                                                        }
+                                                            ?>
+        <?php
+        if (!empty($_SESSION['error_envoi'])) {
+        ?> <p class="error"><?= $_SESSION['error_envoi'] ?></p> <?php
+                                                            unset($_SESSION['error_envoi']);
+                                                        }
+                                                            ?>
+        <?php
+        if (!empty($_SESSION['success'])) {
+        ?> <p class="success"><?= $_SESSION['success'] ?></p> <?php
+                                                            unset($_SESSION['success']);
+                                                        }
+                                                            ?>
+    </div>
+
+
     <section>
         <!--tab titre-->
         <div class="tableau tab-titre trans-tableau-hide">
@@ -88,7 +204,7 @@
                         <img src="assets/images/php.png" alt="">
                         <img src="assets/images/mysql.png" alt="">
                     </div>
-                    <a href="http://wwbrdma.cluster030.hosting.ovh.net/?op=home">Visiter</a>
+                    <a href="http://wwbrdma.cluster030.hosting.ovh.net/mariage/?op=home">Visiter</a>
                 </div>
             </div>
         </div>
@@ -105,54 +221,9 @@
                 <input type="email" name="email" placeholder="Email">
                 <input type="text" name="sujet" placeholder="Sujet">
                 <textarea id="textarea" name="message" placeholder="Message"></textarea>
-                <input type="submit" value="Envoyer">
+                <input type="submit" name="submit" value="Envoyer">
             </form>
 
-            <!--traitement du formulaire de contact-->
-            <?php
-            if (!empty($_POST)) {
-                $msgError = 0;
-                $champs_vides = 0;
-
-                foreach ($_POST as $indice => $valeur) {
-                    $_POST[$indice] = htmlspecialchars($valeur);
-                    $_POST[$indice] = trim($valeur);
-                    if (trim($_POST[$indice] == '')) {
-                        $champs_vides++;
-                    }
-                }
-
-                if ($champs_vides > 0) {
-                    $msgError = 'veuillez remplir tout les champs';
-                } else {
-                    $nom = $_POST['nom'];
-                    $prenom = $_POST['prenom'];
-                    $email = $_POST['email'];
-                    $sujet = $_POST['sujet'];
-                    $message =
-                        'Depuis le site PORTFOLIO
-                        De : ' . $prenom . ' ' . $nom . ' 
-                        Email : ' . $email . '
-                        Message : '
-                        . wordwrap($_POST['message'], 70, "\r\n");
-                }
-                $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net,' . "\r\n" . 'Reply-to:' . $email);
-                if ($mail) {
-                    $msgSucces = 'l\'email a ete envoyé';
-                } else {
-                    $msgError = 'une erreur est survenue';
-                }
-            } else {
-                $msgError = 'veuillez remplir le formulaire avant envoie';
-            }
-
-            // function debug($variable)
-            // {
-            //     echo '<pre>';
-            //     var_dump($variable);
-            //     echo '</pre>';
-            // }
-            ?>
         </div>
 
     </section>
