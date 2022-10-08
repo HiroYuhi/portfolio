@@ -40,24 +40,24 @@ if (isset($_POST['submit'])) {
             //         . wordwrap($_POST['message'], 70, "\r\n");
             // $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net,' . "\r\n" . 'Reply-to:' . $email);
 
-            
+
             //pour l'envoi en html
 
-            $to ='hiroyuhi@laposte.net';
+            $to = 'hiroyuhi@laposte.net';
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
             $sujet = $_POST['sujet'];
-            $message = 
-            "<p>Depuis le <strong>Portfolio</strong></p>
-            <p>De : <strong>".$prenom."</strong> <strong>".$nom."</strong> </p>
-            <p>Email : <strong>".$email."</strong></p>
-            <p>Sujet <strong>".$sujet."</strong></p>
-            <p>Depuis le <strong>".$message."</strong></p>";
+            $message =
+                "<p>Depuis le <strong>Portfolio</strong></p>
+            <p>De : <strong>" . $prenom . ", </strong><strong>" . $nom . "</strong> </p>
+            <p>Email : <strong>" . $email . "</strong></p>
+            <p>Sujet  : <strong>" . $sujet . "</strong></p>
+            <p>Message : <strong>" . $_POST['message'] . "</strong></p>";
 
-            $headers = 'MIME-Version: 1.0'.'\r\n';
-            $headers = 'Content-type:text/html;charset=UTF-8'.'\r\n';
-            $headers .= 'From : <'.$email.'>'.'\r\n';
+            $headers = 'MIME-Version: 1.0' . '\r\n';
+            $headers = 'Content-type:text/html;charset=UTF-8' . '\r\n';
+            $headers .= 'From: <' . $email . '>' . '\r\n';
             $headers .= 'Reply-to:' . $email;
 
             $mail = mail($to, $sujet, $message, $headers);
@@ -137,27 +137,27 @@ function debug($variable)
         <?php
         if (!empty($_SESSION['error'])) {
         ?> <p class="error"><?= $_SESSION['error'] ?></p> <?php
-                                                        unset($_SESSION['error']);
-                                                    }
-                                                        ?>
+                                                            unset($_SESSION['error']);
+                                                        }
+                                                            ?>
         <?php
         if (!empty($_SESSION['error_email'])) {
         ?> <p class="error"><?= $_SESSION['error_email'] ?></p> <?php
-                                                            unset($_SESSION['error_email']);
-                                                        }
-                                                            ?>
+                                                                unset($_SESSION['error_email']);
+                                                            }
+                                                                ?>
         <?php
         if (!empty($_SESSION['error_envoi'])) {
         ?> <p class="error"><?= $_SESSION['error_envoi'] ?></p> <?php
-                                                            unset($_SESSION['error_envoi']);
-                                                        }
-                                                            ?>
+                                                                unset($_SESSION['error_envoi']);
+                                                            }
+                                                                ?>
         <?php
         if (!empty($_SESSION['success'])) {
         ?> <p class="success"><?= $_SESSION['success'] ?></p> <?php
-                                                            unset($_SESSION['success']);
-                                                        }
-                                                            ?>
+                                                                unset($_SESSION['success']);
+                                                            }
+                                                                ?>
     </div>
 
 
