@@ -114,8 +114,6 @@ li {
 
 
 
-
-
 /*HEADER*/
 header {
     width: calc(100% - (3rem + 1vw));
@@ -290,6 +288,52 @@ nav ul li:hover {
 
 .nav-icones-hide {
     transform: translateX(-100%);
+}
+
+
+/*MESSAGES*/
+.message {
+    width: 100%;
+    position: absolute;
+    top: 5vh;
+}
+
+.error,
+.success {
+    width: min(90%, 500px);
+    margin: 0.3rem auto;
+    padding: 0.7rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    opacity: 0;
+    animation: animationMessage 10s linear;
+}
+
+.error {
+    background-color: rgba(177, 125, 125, 0.3);
+    border: solid 1px rgba(255, 0, 0, 0.5);
+    color: red;
+}
+
+.success {
+    background-color: rgba(70, 122, 70, 0.3);
+    border: solid 1px rgba(0, 128, 0, 0.5);
+    color: green;
+}
+
+@keyframes animationMessage {
+    0% {
+        transform: translateY(-3rem);
+    }
+
+    10% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
 }
 
 
@@ -689,56 +733,59 @@ footer {
 
 
 
-    /* .cercle1 {
-    border: solid 0.1px white;
-    filter: blur(5px);
-    border-radius: 50%;
-    width: 250px;
-    height: 250px;
-    padding-left: 290px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-    animation: 3s linear infinite alternate boxshadow,
-    6s linear infinite rotation;
-} */
+
+    .cercle1 {
+        border: solid 0.1px white;
+        filter: blur(5px);
+        border-radius: 50%;
+        width: 250px;
+        height: 250px;
+        padding-left: 290px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        animation: 3s linear infinite alternate boxshadow,
+            6s linear infinite rotation;
+    }
+
 
     /*animation cercle*/
-    /* @keyframes rotation {
-    0% {
-        transform: translate(-50%, -50%) rotate(0);
+    @keyframes rotation {
+        0% {
+            transform: translate(-50%, -50%) rotate(0);
 
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
     }
 
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
 
-@keyframes boxshadow {
-    0% {
-        box-shadow:
-            0 0 20px rgba(132, 0, 255, 0.5),
-            inset 0 0 20px rgba(132, 0, 255, 0.5),
-            0 0 20px rgba(255, 0, 221, 0.5),
-            inset 0 0 20px rgb(255, 0, 221, 0.5),
-            0 0 20px rgba(40, 54, 182, 0.5),
-            inset 0 0 20px rgb(40, 54, 182, 0.5),
-            0 0 20px rgba(120, 13, 241, 0.5),
-            inset 0 0 20px rgb(120, 13, 241, 0.5), ;
-    }
+    @keyframes boxshadow {
+        0% {
+            box-shadow:
+                0 0 20px rgba(132, 0, 255, 0.5),
+                inset 0 0 20px rgba(132, 0, 255, 0.5),
+                0 0 20px rgba(255, 0, 221, 0.5),
+                inset 0 0 20px rgb(255, 0, 221, 0.5),
+                0 0 20px rgba(40, 54, 182, 0.5),
+                inset 0 0 20px rgb(40, 54, 182, 0.5),
+                0 0 20px rgba(120, 13, 241, 0.5),
+                inset 0 0 20px rgb(120, 13, 241, 0.5), ;
+        }
 
-    100% {
-        box-shadow:
-            0 -15px 20px rgba(132, 0, 255, 0.5),
-            inset 0 15px 20px rgba(132, 0, 255, 0.5),
-            15px 0 20px rgb(255, 0, 221, 0.5),
-            inset -15px 0 20px rgb(255, 0, 221, 0.5),
-            0 15px 20px rgb(40, 54, 182, 0.5),
-            inset 0 -15px 20px rgb(40, 54, 182, 0.5),
-            -15px 0 20px rgb(120, 13, 241, 0.5),
-            inset 15px 0 20px rgb(120, 13, 241, 0.5);
+        100% {
+            box-shadow:
+                0 -15px 20px rgba(132, 0, 255, 0.5),
+                inset 0 15px 20px rgba(132, 0, 255, 0.5),
+                15px 0 20px rgb(255, 0, 221, 0.5),
+                inset -15px 0 20px rgb(255, 0, 221, 0.5),
+                0 15px 20px rgb(40, 54, 182, 0.5),
+                inset 0 -15px 20px rgb(40, 54, 182, 0.5),
+                -15px 0 20px rgb(120, 13, 241, 0.5),
+                inset 15px 0 20px rgb(120, 13, 241, 0.5);
+        }
     }
-} */

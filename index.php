@@ -26,41 +26,45 @@ if (isset($_POST['submit'])) {
             $_SESSION['error'] = 'veuillez remplir tout les champs';
         } else {
 
-            //pour l'envoi en local
+            //pour l'envoi en text / local
 
-            // $nom = $_POST['nom'];
-            // $prenom = $_POST['prenom'];
-            // $email = $_POST['email'];
-            // $sujet = $_POST['sujet'];
-            // $message =
-            //     'Depuis le site PORTFOLIO :
-            //         De : ' . $prenom . ' ' . $nom . ' 
-            //         Email : ' . $email . '
-            //         Message : '
-            //         . wordwrap($_POST['message'], 70, "\r\n");
-            // $mail = mail('hiroyuhi@laposte.net', $sujet, $message, 'From: hiroyuhi.site@laposte.net,' . "\r\n" . 'Reply-to:' . $email);
-
-
-            //pour l'envoi en html
-
-            $to = 'hiroyuhi@laposte.net';
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
             $sujet = $_POST['sujet'];
             $message =
-                "<p>Depuis le <strong>Portfolio</strong></p>
-            <p>De : <strong>" . $prenom . ", </strong><strong>" . $nom . "</strong> </p>
-            <p>Email : <strong>" . $email . "</strong></p>
-            <p>Sujet  : <strong>" . $sujet . "</strong></p>
-            <p>Message : <strong>" . $_POST['message'] . "</strong></p>";
+                'Depuis le site PORTFOLIO :
+                      De : ' . $prenom . ' ' . $nom . ' 
+                      Email : ' . $email . '
+                      Message : ' . wordwrap($_POST['message'], 70, "\r\n");
 
-            $headers = 'MIME-Version: 1.0' . '\r\n';
-            $headers = 'Content-type:text/html;charset=UTF-8' . '\r\n';
-            $headers .= 'From: <' . $email . '>' . '\r\n';
-            $headers .= 'Reply-to:' . $email;
+            $headers[] = 'From: hiroyuhi.site@laposte.net';
+            $headers[] = 'Reply-to:' . $email;
 
-            $mail = mail($to, $sujet, $message, $headers);
+            $mail = mail('hiroyuhi@laposte.net', $sujet, $message, implode("\r\n", $headers));
+
+
+            //pour l'envoi en html / hebergeur
+
+            // $to = 'hiroyuhi@laposte.net';
+            // $nom = $_POST['nom'];
+            // $prenom = $_POST['prenom'];
+            // $email = $_POST['email'];
+            // $sujet = $_POST['sujet'];
+            // $message =
+            //     "<p>Depuis le <strong>Portfolio</strong> </p>
+            //      <p>De : " . $prenom . " <strong>" . $nom . "</strong> </p>
+            //      <p>Email : <strong>" . $email . "</strong> </p>
+            //      <p>Sujet  : <strong>" . $sujet . "</strong> </p>
+            //      <p>Message : <strong>" . $_POST['message'] . "</strong> </p>";
+
+            // //$headers[] = 'MIME-Version: 1.0';   // ?? fonctionne sans mais pas avec !! ??
+            // $headers[] = "Content-type:text/html; charset=UTF-8";
+            // $headers[] = "From: <" . $email . ">";
+            // $headers[] = "Reply-to: <" . $email . ">";
+
+            // $mail = mail($to, $sujet, $message, implode("\r\n", $headers));
+            // // from / reply ne fonctionnent pas..
         }
 
         if ($mail) {
